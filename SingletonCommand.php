@@ -21,12 +21,13 @@ abstract class SingletonCommand extends Command
     /**
      * SingletonCommand constructor.
      * @param LockService $lockService
+     * @param string $name
      * @throws \Exception
      */
-    public function __construct(LockService $lockService)
+    public function __construct(LockService $lockService, $name = null)
     {
         $this->lockService = $lockService;
-        parent::__construct();
+        parent::__construct($name);
     }
 
     /**
