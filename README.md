@@ -4,7 +4,7 @@ If you need to simply run symfony command only in one process and you don't want
 
 ### Require
 1. `symfony/console`
-2. `jced-artem/lock-service` - uses this package to replace LockHandler because it can't work with several hosts. This is important here because command can be launced in several servers as cron with shared folder.
+2. `jced-artem/lock-service` - uses this package to replace LockHandler because it can't work with several hosts. This is important here because command can be launched in several servers as cron with shared folder.
 
 ### Install
 `composer require jced-artem/singleton-command`
