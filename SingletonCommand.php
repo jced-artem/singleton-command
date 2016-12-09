@@ -13,9 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class SingletonCommand extends Command
 {
     /** @var string */
-    protected $name = null;
-
-    /** @var string */
     private $lockName = null;
 
     /** @var LockService */
@@ -29,9 +26,6 @@ abstract class SingletonCommand extends Command
     public function __construct(LockService $lockService)
     {
         $this->lockService = $lockService;
-        if (empty($this->name)) {
-            throw new \Exception('Empty command name');
-        }
         parent::__construct();
     }
 
@@ -69,7 +63,7 @@ abstract class SingletonCommand extends Command
     {
         $this->beforeLock($input, $output);
         if (empty($this->lockName)) {
-            $this->lockName = $this->name;
+            $this->lockName = $this->getName();
         }
         if (!$this->lockService->lock($this->lockName)) {
             throw new \Exception('Already launched command [ ' . $this->lockName .  ' ]');
@@ -83,11 +77,6 @@ abstract class SingletonCommand extends Command
      */
     protected function release()
     {
-        return $this->lockService->release($this->name);
-    }
-
-    protected function configure()
-    {
-        $this->setName($this->name);
+        return $this->lockService->release($this->lockName);
     }
 }
