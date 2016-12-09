@@ -1,0 +1,22 @@
+{
+    "name": "jced-artem/singleton-command",
+    "type": "library",
+    "description": "Symfony singleton command. Command that can't be run in parallel before previous process stopped.",
+    "keywords": ["symfony", "command", "singleton", "lock"],
+    "homepage": "https://github.com/jced-artem",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artem Jced",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "symfony/console": "*",
+        "jced-artem/lock-service": "*"
+    },
+    "require-dev": {
+        "symfony/console": "*",
+        "jced-artem/lock-service": "*"
+    }
+}
