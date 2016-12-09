@@ -14,14 +14,12 @@ If you need to simply run symfony command only in one process and you don't want
 ```
 class JobCommand extends SingletonCommand implements SingletonCommandInterface
 {
-    /** @var string */
-    protected $name = 'cron:job';
-
     protected function configure()
     {
-        $this->addArgument('someArgument', InputArgument::REQUIRED);
-        // this is important to execute parent method
-        parent::configure();
+        $this
+            ->setName('cron:job')
+            ->addArgument('someArgument', InputArgument::REQUIRED)
+        ;
     }
 
     /**
@@ -31,7 +29,7 @@ class JobCommand extends SingletonCommand implements SingletonCommandInterface
     protected function beforeLock(InputInterface $input, OutputInterface $output)
     {
         // You can create dynamic lock-names if you need. If don't - just remove this method.
-        $this->setLockName($this->name . ':' . $input->getArgument('someArgument'));
+        $this->setLockName($this->getName() . ':' . $input->getArgument('someArgument'));
     }
 
     /**
